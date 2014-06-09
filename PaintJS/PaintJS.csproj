@@ -57,6 +57,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="scripts\main\shape\paint.shape.triangle.js" />
+    <Content Include="scripts\main\shape\paint.shape.square.js" />
+    <Content Include="scripts\main\shape\paint.shape.rectangle.js" />
+    <Content Include="scripts\main\shape\paint.shape.circle.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -66,18 +70,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.html" />
-    <Content Include="scripts\handlebars-v1.3.0.js" />
-    <Content Include="scripts\jquery-1.11.1.js" />
-    <Content Include="scripts\kinetic-v5.1.0.js" />
-    <Content Include="scripts\paintjs.js" />
-    <Content Include="scripts\raphael.js" />
+    <Content Include="scripts\libraries\handlebars-v1.3.0.js" />
+    <Content Include="scripts\libraries\jquery-1.11.1.js" />
+    <Content Include="scripts\libraries\kinetic-v5.1.0.js" />
+    <Content Include="scripts\main\canvas\paint.canvas.js" />
+    <Content Include="scripts\main\toolbar\paint.toolbar.js" />
+    <Content Include="scripts\main\paintjs.js" />
+    <Content Include="scripts\libraries\raphael.js" />
+    <Content Include="scripts\main\shape\paint.shape.js" />
     <Content Include="styles\paintjs.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="scripts\main\toolbar\actions\" />
+    <Folder Include="scripts\main\toolbar\options\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
