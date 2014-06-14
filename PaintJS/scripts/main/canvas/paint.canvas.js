@@ -16,33 +16,37 @@
         var isDrawing;
         var currentBrush = undefined;
 
-        if (arguments.lineWidth) {
-            ctx.lineWidth = arguments.lineWidth;
-        }
+        //default values
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
 
-        if (arguments.color) {
-            ctx.strokeStyle = arguments.color;
-        }
+        if (arguments) {
+            if (arguments.lineWidth) {
+                ctx.lineWidth = arguments.lineWidth;
+            }
 
-        if (arguments.type) {
-            currentBrush = brushes[arguments.type];
-            currentBrush.init();
+            if (arguments.color) {
+                ctx.strokeStyle = arguments.color;
+            }
+
+            if (arguments.type) {
+                currentBrush = brushes[arguments.type];
+                currentBrush.init();
+            }
         }
 
         canvasElement.onmousedown = function (e) {
             isDrawing = true;
-            ctx.lineJoin = 'round';
-            ctx.lineCap = 'round';
             ctx.moveTo(e.clientX, e.clientY);
 
-            if (currentBrush.onMouseDownSpecific) {
+            if (currentBrush && currentBrush.onMouseDownSpecific) {
                 currentBrush.onMouseDownSpecific(e);
             }
         };
 
         canvasElement.onmousemove = function (e) {
             if (isDrawing) {
-                if (!currentBrush.action) {
+                if (!currentBrush || !currentBrush.action) {
                     ctx.lineTo(e.clientX, e.clientY);
                     ctx.stroke();
                 } else {
@@ -53,7 +57,7 @@
 
         canvasElement.onmouseup = function () {
             isDrawing = false;
-            if (currentBrush.onMouseUpSpecific) {
+            if (currentBrush && currentBrush.onMouseUpSpecific) {
                 currentBrush.onMouseUpSpecific();
             }
         };
@@ -417,7 +421,14 @@
         }
     };
 
+    var eraserPen = {
+        init: function () {
+            ctx.lineCap = 'square';
+        }
+    };
+
     var brushes = {
+        eraser: eraserPen,
         smoothingShadow: smoothingShadow,
         radialGradient: radialGradient,
         brushFurPen: brushFurPen,
