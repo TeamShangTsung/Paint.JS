@@ -37,7 +37,7 @@
             ctx.closePath();
             ctx.stroke();
 
-            canvas.addEventListener("onmoeuseup", onMouseUp);
+            canvas.addEventListener("mouseup", onMouseUp);
         }
 
         function onMouseUp(ev) {
