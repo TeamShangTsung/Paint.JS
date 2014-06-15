@@ -8,7 +8,7 @@
         paint.ctx = paint.canvasElement.getContext('2d');
         paint.ctxTemp = paint.canvasTemp.getContext('2d');
 
-        var header = $('header')[0];
+        var header = $('#toolbar-container')[0];
         paint.ctx.translate(0, -header.offsetHeight);
         paint.ctxTemp.translate(0, -header.offsetHeight);
 
