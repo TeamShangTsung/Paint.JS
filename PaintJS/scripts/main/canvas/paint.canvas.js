@@ -2,6 +2,8 @@
     paint.canvas = {};
     var me = paint.canvas;
 
+    var animationPath = [];
+
     me.drawing = function (arguments) {
         var isDrawing;
         var currentBrush = undefined;
@@ -30,6 +32,7 @@
         canvasElement.onmousedown = function (e) {
             isDrawing = true;
             ctx.moveTo(e.clientX, e.clientY);
+            animationPath.push({x: e.clientX, y: e.clientY});
 
             if (currentBrush && currentBrush.onMouseDownSpecific) {
                 currentBrush.onMouseDownSpecific(e);
@@ -41,6 +44,7 @@
                 if (!currentBrush || !currentBrush.action) {
                     ctx.lineTo(e.clientX, e.clientY);
                     ctx.stroke();
+                    animationPath.push({x: e.clientX, y: e.clientY});
                 } else {
                     currentBrush.action(e);
                 }
@@ -54,6 +58,27 @@
             }
         };
     }
+
+    me.animateDrawing = function(){
+        var ctx = paint.ctx,
+            index = 0;
+
+        ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+        ctx.beginPath();
+        ctx.moveTo(animationPath[0]['x'], animationPath[0]['y']);
+
+        function drawAnimation(){
+            if(index == animationPath.length - 1) {
+                return;
+            }
+            index += 1;
+            ctx.lineTo(animationPath[index]['x'], animationPath[index]['y']);
+            ctx.stroke();
+
+            window.requestAnimationFrame(drawAnimation);
+        }
+        drawAnimation();
+    };
 
     me.stopDrawing = function () {
         var canvasElement = paint.canvasElement;
