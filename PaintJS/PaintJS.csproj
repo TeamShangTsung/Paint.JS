@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="scripts\main\shape\paint.shape.chat.js" />
     <Content Include="scripts\main\shape\paint.shape.triangle.js" />
     <Content Include="scripts\main\shape\paint.shape.square.js" />
     <Content Include="scripts\main\shape\paint.shape.rectangle.js" />
