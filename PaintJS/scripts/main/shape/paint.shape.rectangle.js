@@ -1,71 +1,37 @@
 ﻿(function (paint, $, undefined) {
+    //Constructor
     paint.shape.rectangle = function () {
-        // paint.shape.call(this);
-        //implement base functions with this.
-        var canvas = document.getElementById("canvas");
-        var ctx = canvas.getContext("2d");
+        // Call the parent constructor
+        paint.shape.call(this)
+        paint.canvasElement.addEventListener("mousedown", this.onMouseDown);
 
-        var startPosition = {
-            x: 0,
-            y: 0
-        };
+        var self = this;
+        var ctx = paint.ctx;
+        var canvas = paint.canvasElement;
 
-        var finalPosition = {
-            x: 0,
-            y: 0
-        };
-
-        canvas.addEventListener("mousedown", onMouseDown);
-
-        function onMouseDown(ev) {
-            startPosition.x = ev.layerX;
-            startPosition.y = ev.layerY;
-
-            canvas.addEventListener("mousemove", onMouseMove);
-        }
-
-        function onMouseMove(ev) {
-            finalPosition.x = ev.layerX;
-            finalPosition.y = ev.layerY;
+        //override base methods
+        paint.shape.rectangle.prototype.onMouseMove = function (ev) {
+            //call base method
+            paint.shape.prototype.onMouseMove(ev);
 
             ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
             ctx.beginPath();
-            ctx.moveTo(startPosition.x, startPosition.y);
-            ctx.lineTo(finalPosition.x, startPosition.y);
-            ctx.lineTo(finalPosition.x, finalPosition.y);
-            ctx.lineTo(startPosition.x, finalPosition.y);
+            ctx.moveTo(self.startPosition.x, self.startPosition.y);
+            ctx.lineTo(self.finalPosition.x, self.startPosition.y);
+            ctx.lineTo(self.finalPosition.x, self.finalPosition.y);
+            ctx.lineTo(self.startPosition.x, self.finalPosition.y);
             ctx.closePath();
             ctx.stroke();
 
-            canvas.addEventListener("onmoeuseup", onMouseUp);
-        }
-
-        function onMouseUp(ev) {
-            canvas.removeEventListener("mousemove", onMouseMove);
-
-            finalPosition.x = ev.layerX;
-            finalPosition.y = ev.layerY;
-
-            var stepX = 0;
-            var stepY = 0;
-            var stepCount = 0;
-
-            if (startPosition.x < finalPosition.x) {
-                stepX = 5;
-            } else if (startPosition.x > finalPosition.x) {
-                stepX = -5;
-            }
-
-            // else stepX = 0 it is default
-
-            stepCount = Math.abs((finalPosition.x - startPosition.x) / stepX);
-            stepY = Math.abs((finalPosition.y - startPosition.y) / stepCount);
-
-            if (startPosition.y > finalPosition.y) {
-                stepY *= -1;
-            }
-
-            var multiplier = Math.abs((finalPosition.x - startPosition.x) / stepCount);
+            canvas.addEventListener("onmoeuseup", self.onMouseUp);
         }
     }
+
+    $(function () {
+        // inherit paint.shape
+        paint.shape.rectangle.prototype = new paint.shape();
+
+        // correct the constructor pointer because it points to paint.shape
+        paint.shape.rectangle.prototype.constructor = paint.shape.rectangle;
+    });
 })(window.paint = window.paint || {}, jQuery);

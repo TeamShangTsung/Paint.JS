@@ -61,6 +61,7 @@
     <Content Include="scripts\main\shape\paint.shape.square.js" />
     <Content Include="scripts\main\shape\paint.shape.rectangle.js" />
     <Content Include="scripts\main\shape\paint.shape.circle.js" />
+    <Content Include="scripts\main\shape\paint.shape.line.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

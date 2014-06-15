@@ -1,67 +1,60 @@
 ﻿(function (paint, $, undefined) {
     paint.shape = function () {
-        //implement base functions with this.
-        var canvas = document.getElementById("canvas");
-        var ctx = canvas.getContext("2d");
+        var self = this;
+        var ctx = paint.ctx;
+        var canvas = paint.canvasElement;
 
-        var startPosition = {
+        this.startPosition = {
             x: 0,
             y: 0
         };
 
-        var finalPosition = {
+        this.finalPosition = {
             x: 0,
             y: 0
         };
 
-        canvas.addEventListener("mousedown", onMouseDown);
+        paint.canvasElement.addEventListener("mousedown", this.onMouseDown);
 
-        function onMouseDown(ev) {
-            startPosition.x = ev.layerX;
-            startPosition.y = ev.layerY;
+        //Base methods
+        paint.shape.prototype.onMouseDown = function (ev) {
+            self.startPosition.x = ev.layerX;
+            self.startPosition.y = ev.layerY;
 
-            canvas.addEventListener("mousemove", onMouseMove);
+            canvas.addEventListener("mousemove", self.onMouseMove);
         }
 
-        function onMouseMove(ev) {
-            finalPosition.x = ev.layerX;
-            finalPosition.y = ev.layerY;
-
-            ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-            ctx.beginPath();
-            ctx.moveTo(startPosition.x, startPosition.y);
-            ctx.lineTo(finalPosition.x, finalPosition.y);
-            ctx.stroke();
-
-            canvas.addEventListener("onmoeuseup", onMouseUp);
+        paint.shape.prototype.onMouseMove = function (ev) {
+            self.finalPosition.x = ev.layerX;
+            self.finalPosition.y = ev.layerY;
         }
 
-        function onMouseUp(ev) {
-            canvas.removeEventListener("mousemove", onMouseMove);
+        paint.shape.prototype.onMouseUp = function (ev) {
+            canvas.removeEventListener("mousemove", self.onMouseMove);
 
-            finalPosition.x = ev.layerX;
-            finalPosition.y = ev.layerY;
+            self.finalPosition.x = ev.layerX;
+            self.finalPosition.y = ev.layerY;
 
             var stepX = 0;
             var stepY = 0;
             var stepCount = 0;
 
-            if (startPosition.x < finalPosition.x) {
+            if (self.startPosition.x < self.finalPosition.x) {
                 stepX = 5;
-            } else if (startPosition.x > finalPosition.x) {
+            } else if (self.startPosition.x > self.finalPosition.x) {
                 stepX = -5;
             }
 
             // else stepX = 0 it is default
 
-            stepCount = Math.abs((finalPosition.x - startPosition.x) / stepX);
-            stepY = Math.abs((finalPosition.y - startPosition.y) / stepCount);
+            stepCount = Math.abs((self.finalPosition.x - self.startPosition.x) / stepX);
+            stepY = Math.abs((self.finalPosition.y - self.startPosition.y) / stepCount);
 
-            if (startPosition.y > finalPosition.y) {
+            if (self.startPosition.y > self.finalPosition.y) {
                 stepY *= -1;
             }
 
-            var multiplier = Math.abs((finalPosition.x - startPosition.x) / stepCount);
+            var multiplier = Math.abs((self.finalPosition.x - self.startPosition.x) / stepCount);
 
             // In Sasho's demo here is the animation frame of drawing
             // But it could be in other script "animation", couldn't it?
