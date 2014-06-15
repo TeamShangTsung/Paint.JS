@@ -7,9 +7,18 @@ body, canvas, header {
     border: 1px solid black;
 }
 
+#canvasTemp {
+    display: block;
+    background-color: transparent;
+}
+
+#canvas, #canvasTemp {
+    position: absolute;
+}
+
 body {
     width: 800px;
-    height:500px;
+    height: 500px;
 }
 
 header {

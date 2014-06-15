@@ -9,21 +9,31 @@
         var ctx = paint.ctx;
         var canvas = paint.canvasElement;
 
+        function drawRectangle(target) {
+            target.beginPath();
+            target.moveTo(self.startPosition.x, self.startPosition.y);
+            target.lineTo(self.finalPosition.x, self.startPosition.y);
+            target.lineTo(self.finalPosition.x, self.finalPosition.y);
+            target.lineTo(self.startPosition.x, self.finalPosition.y);
+            target.closePath();
+            target.stroke();
+        }
+
         //override base methods
         paint.shape.rectangle.prototype.onMouseMove = function (ev) {
             //call base method
             paint.shape.prototype.onMouseMove(ev);
 
             ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-            ctx.beginPath();
-            ctx.moveTo(self.startPosition.x, self.startPosition.y);
-            ctx.lineTo(self.finalPosition.x, self.startPosition.y);
-            ctx.lineTo(self.finalPosition.x, self.finalPosition.y);
-            ctx.lineTo(self.startPosition.x, self.finalPosition.y);
-            ctx.closePath();
-            ctx.stroke();
+            drawRectangle(ctx);
 
             canvas.addEventListener("mouseup", self.onMouseUp);
+        }
+
+        paint.shape.rectangle.prototype.onMouseUp = function (ev) {
+            //call base method
+            paint.shape.prototype.onMouseUp(ev);
+            drawRectangle(paint.ctxTemp);
         }
     }
 

@@ -9,18 +9,28 @@
 		var ctx = paint.ctx;
 		var canvas = paint.canvasElement;
 
+		function drawLine(target) {
+		    target.beginPath();
+		    target.moveTo(self.startPosition.x, self.startPosition.y);
+		    target.lineTo(self.finalPosition.x, self.finalPosition.y);
+		    target.stroke();
+		}
+
 		//override base methods
 		paint.shape.line.prototype.onMouseMove = function (ev) {
 			//call base method
 			paint.shape.prototype.onMouseMove(ev);
 
 			ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-			ctx.beginPath();
-			ctx.moveTo(self.startPosition.x, self.startPosition.y);
-			ctx.lineTo(self.finalPosition.x, self.finalPosition.y);
-			ctx.stroke();
+			drawLine(ctx);
 
-			canvas.addEventListener("onmoeuseup", self.onMouseUp);
+			canvas.addEventListener("mouseup", self.onMouseUp);
+		}
+
+		paint.shape.line.prototype.onMouseUp = function (ev) {
+		    //call base method
+		    paint.shape.prototype.onMouseUp(ev);
+		    drawLine(paint.ctxTemp);
 		}
 	}
 
