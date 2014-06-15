@@ -11,8 +11,6 @@
     <!-- Main -->
     <script src="scripts/main/paintjs.js"></script>
     <!-- Toolbar -->
-    <script src="scripts/main/toolbar/paint.toolbar.js"></script>
-    <script src="scripts/main/toolbar/actions/paint.toolbar.actions.js"></script>
     <!-- Canvas -->
     <script src="scripts/main/canvas/paint.canvas.js"></script>
     <!-- Shapes -->
@@ -26,25 +24,75 @@
 
 </head>
 <body>
-    <header>
-        <section id="Image">
-            <input type="image" src="styles/images/resize.png" id="resize" />
-            <input type="image" src="styles/images/rotate.png" id="rotate" />
-        </section>
-        <section id="Tools">
-            <input type="image" src="styles/images/pencil.png" id="pencil" />
-            <input type="image" src="styles/images/fill.png" id="fill" />
-            <input type="image" src="styles/images/text.png" id="text" />
-            <input type="image" src="styles/images/erase.png" id="eraser" />
-            <input type="image" src="styles/images/colorPicker.png" id="colorPicker" />
-            <input type="image" src="styles/images/zoom.png" id="zoom" />
-        </section>
-        <section id="Shapes">
-            <input type="image" src="styles/images/size.png" id="size" />
-        </section>
-        <section id="Colors"></section>
-    </header>
-    <canvas id="canvasTemp" width="800" height="400"></canvas>
-    <canvas id="canvas" width="800" height="400"></canvas>
+    <div id="toolbar-container">
+        <div id="tools" class="container">
+            <div id="pencil" class="tool"></div>
+            <div id="text" class="tool"></div>
+            <div id="eraser" class="tool"></div>
+            <div id="tools-label" class="label">Tools</div>
+        </div>
+        <div id="brushes" class="container">
+            <div id="brush-tool-container">
+                <div id="brush" class="tool"></div>
+                <div id="brush-select" class="tool">Brushes</div>
+                <div id="brushes-container">
+                    <div id="brush-1" class="brush-type">
+                        
+                    </div>
+                    <div id="brush-2" class="brush-type">
+                        
+                    </div>
+                    <div id="brush-3" class="brush-type">
+                        
+                    </div>
+                    <div id="brush-4" class="brush-type">
+                        
+                    </div>
+                    <div id="brush-5" class="brush-type">
+                        
+                    </div>
+                    <div id="brush-6" class="brush-type">
+                        
+                    </div>
+                    <div id="brush-7" class="brush-type">
+                        
+                    </div>
+                    <div id="brush-8" class="brush-type">
+                        
+                    </div>
+                    <div id="brush-9" class="brush-type">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="shapes" class="container">
+            <div id="shapes-container">
+                <div id="line" class="tool"></div>
+                <div id="freehand" class="tool"></div>
+                <div id="rectangle" class="tool"></div>
+                <div id="circle" class="tool"></div>
+                <div id="chat" class="tool"></div>
+            </div>
+            <div id="shapes-label" class="label">Shapes</div>
+        </div>
+        <div id="line-width" class="container">
+            <div id="line-width-select">
+                <div id="line-width-label" class="label">Line-width</div>
+                <div id="line-width-container">
+                    <div id="width-1" class="line-width-type"></div>
+                    <div id="width-2" class="line-width-type"></div>
+                    <div id="width-3" class="line-width-type"></div>
+                    <div id="width-4" class="line-width-type"></div>
+                </div>
+            </div>
+        </div>
+        <div id="colors" class="container">
+
+            <div class="label">Colors</div>
+        </div>
+    </div>
+    <canvas id="canvasTemp" width="1000" height="389"></canvas>
+    <canvas id="canvas" width="1000" height="389"></canvas>
 </body>
 </html>
