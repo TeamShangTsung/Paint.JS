@@ -23,7 +23,7 @@
             ctx.closePath();
             ctx.stroke();
 
-            canvas.addEventListener("onmoeuseup", self.onMouseUp);
+            canvas.addEventListener("mouseup", self.onMouseUp);
         }
     }
 
