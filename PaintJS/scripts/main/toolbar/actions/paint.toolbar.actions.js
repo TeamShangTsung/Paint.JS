@@ -12,7 +12,17 @@
         });
     };
 
-    me.spray = function(sprayWidth){
+    me.startDrawing = function (target) {
+        var brushtype = target.attr('data-brush-type');
+        var lineWidth = parseInt($('#line-width').attr('data-line-width'));
+        var brushObject = {
+            type: brushtype,
+            lineWidth: lineWidth
+        };
+        paint.canvas.drawing(brushObject);
+    };
+
+    me.spray = function (sprayWidth) {
         var sprayWidth = sprayWidth || 5;
 
         paint.canvas.drawing({
@@ -21,7 +31,7 @@
         });
     };
 
-    me.smoothingShadow = function(brushWidth, color){
+    me.smoothingShadow = function (brushWidth, color) {
         var brushWidth = brushWidth || 1,
             color = color || 'black';
 
@@ -32,7 +42,7 @@
         });
     };
 
-    me.radialGradient = function(brushWidth, color){
+    me.radialGradient = function (brushWidth, color) {
         var brushWidth = brushWidth || 5,
             color = color || 'black';
 
@@ -43,7 +53,7 @@
         });
     };
 
-    me.customPen = function(brushWidth, color){
+    me.customPen = function (brushWidth, color) {
         var brushWidth = brushWidth || 5,
             color = color || 'black';
 
@@ -54,7 +64,7 @@
         });
     };
 
-    me.slicedPen = function(brushWidth, color){
+    me.slicedPen = function (brushWidth, color) {
         var brushWidth = brushWidth || 5,
             color = color || 'black';
 
@@ -65,7 +75,7 @@
         });
     };
 
-    me.trailPen = function(brushWidth, color){
+    me.trailPen = function (brushWidth, color) {
         var brushWidth = brushWidth || 5,
             color = color || 'black';
 
@@ -76,7 +86,7 @@
         });
     };
 
-    me.randomRadius = function(brushRadius, color){
+    me.randomRadius = function (brushRadius, color) {
         var brushRadius = brushRadius || 5,
             color = color || 'black';
 
@@ -87,7 +97,7 @@
         });
     };
 
-    me.neighbourPoints = function(brushWidth, color){
+    me.neighbourPoints = function (brushWidth, color) {
         var brushWidth = brushWidth || 5,
             color = color || 'black';
 

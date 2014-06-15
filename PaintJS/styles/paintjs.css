@@ -191,6 +191,7 @@ body {
     height: 126px;
     background-color: white;
     border: 1px solid black;
+    z-index:1000;
 }
 
 .brush-type {

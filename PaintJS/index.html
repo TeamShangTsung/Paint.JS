@@ -38,10 +38,10 @@
                 <div id="brush" class="tool"></div>
                 <div id="brush-select" class="tool">Brushes</div>
                 <div id="brushes-container">
-                    <div id="brush-1" class="brush-type">
-                        
+                    <div id="brush-1" class="brush-type" onclick="paint.toolbar.actions.startDrawing($(this));" data-brush-type="smoothingShadow">
+
                     </div>
-                    <div id="brush-2" class="brush-type">
+                    <div id="brush-2" class="brush-type" onclick="">
                         
                     </div>
                     <div id="brush-3" class="brush-type">
@@ -78,7 +78,7 @@
             </div>
             <div id="shapes-label" class="label">Shapes</div>
         </div>
-        <div id="line-width" class="container">
+        <div id="line-width" class="container" data-line-width="1">
             <div id="line-width-select">
                 <div id="line-width-label" class="label">Line-width</div>
                 <div id="line-width-container">
