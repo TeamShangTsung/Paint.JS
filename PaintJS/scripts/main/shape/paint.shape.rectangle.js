@@ -24,7 +24,8 @@
             //call base method
             paint.shape.prototype.onMouseMove(ev);
 
-            ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+            paint.canvas.clearCanvas();
+            //ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
             drawRectangle(ctx);
 
             canvas.addEventListener("mouseup", self.onMouseUp);

@@ -61,9 +61,11 @@
 
     me.animateDrawing = function(){
         var ctx = paint.ctx,
+            canvasElement = paint.canvasElement,
             index = 0;
 
-        ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+        me.clearCanvas();
+        //ctx.clearRect(0, 100, canvasElement.clientWidth, canvasElement.clientHeight);
         ctx.beginPath();
         ctx.moveTo(animationPath[0]['x'], animationPath[0]['y']);
 

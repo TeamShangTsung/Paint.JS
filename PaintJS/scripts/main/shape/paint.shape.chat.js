@@ -14,7 +14,8 @@
             //call base method
             paint.shape.prototype.onMouseMove(ev);
 
-            ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+            paint.canvas.clearCanvas();
+            //ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
             var chat = Math.abs(self.startPosition.x - self.finalPosition.x) / 5;
             ctx.beginPath();
             ctx.moveTo(self.startPosition.x, self.startPosition.y);
