@@ -1,7 +1,6 @@
 ﻿(function (paint, $, undefined) {
     paint.shape = function () {
         var self = this;
-        var ctx = paint.ctx;
         var canvas = paint.canvasElement;
 
         this.startPosition = {
@@ -18,22 +17,22 @@
 
         //Base methods
         paint.shape.prototype.onMouseDown = function (ev) {
-            self.startPosition.x = ev.layerX;
-            self.startPosition.y = ev.layerY;
+            self.startPosition.x = ev.clientX;
+            self.startPosition.y = ev.clientY;
 
             canvas.addEventListener("mousemove", self.onMouseMove);
         }
 
         paint.shape.prototype.onMouseMove = function (ev) {
-            self.finalPosition.x = ev.layerX;
-            self.finalPosition.y = ev.layerY;
+            self.finalPosition.x = ev.clientX;
+            self.finalPosition.y = ev.clientY;
         }
 
         paint.shape.prototype.onMouseUp = function (ev) {
             canvas.removeEventListener("mousemove", self.onMouseMove);
 
-            self.finalPosition.x = ev.layerX;
-            self.finalPosition.y = ev.layerY;
+            self.finalPosition.x = ev.clientX;
+            self.finalPosition.y = ev.clientY;
 
             var stepX = 0;
             var stepY = 0;
@@ -55,9 +54,6 @@
             }
 
             var multiplier = Math.abs((self.finalPosition.x - self.startPosition.x) / stepCount);
-
-            // In Sasho's demo here is the animation frame of drawing
-            // But it could be in other script "animation", couldn't it?
         }
     }
 })(window.paint = window.paint || {}, jQuery);

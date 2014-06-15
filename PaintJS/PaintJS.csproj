@@ -76,6 +76,7 @@
     <Content Include="scripts\libraries\jquery-1.11.1.js" />
     <Content Include="scripts\libraries\kinetic-v5.1.0.js" />
     <Content Include="scripts\main\canvas\paint.canvas.js" />
+    <Content Include="scripts\main\toolbar\actions\paint.toolbar.actions.js" />
     <Content Include="scripts\main\toolbar\paint.toolbar.js" />
     <Content Include="scripts\main\paintjs.js" />
     <Content Include="scripts\libraries\raphael.js" />
@@ -87,7 +88,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="scripts\main\toolbar\actions\" />
     <Folder Include="scripts\main\toolbar\options\" />
   </ItemGroup>
   <PropertyGroup>

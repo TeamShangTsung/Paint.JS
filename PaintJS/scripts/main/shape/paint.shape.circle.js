@@ -15,7 +15,7 @@
             paint.shape.prototype.onMouseMove(ev);
 
             ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-            var radius = Math.abs(sel.startPosition.x - self.finalPosition.x);
+            var radius = Math.abs(self.startPosition.x - self.finalPosition.x);
             ctx.beginPath();
             ctx.arc(self.startPosition.x, self.startPosition.y, radius, 0, 2 * Math.PI);
             ctx.stroke();

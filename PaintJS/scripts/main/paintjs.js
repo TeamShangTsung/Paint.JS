@@ -7,6 +7,11 @@
 
         var header = $('header')[0];
         paint.ctx.translate(0, -header.offsetHeight);
+
+        CanvasRenderingContext2D.prototype.canvasPosition = {
+            x: 0,
+            y: -header.offsetHeight
+        };
     })
 
 })(jQuery);
