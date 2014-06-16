@@ -139,7 +139,7 @@
     var brushFurPen = {
         init: function () {
             this.img = new Image();
-            this.img.src = '../../styles/images/brush2.png';
+            this.img.src = '../../styles/images/brushPattern.png';
         },
         onMouseDownSpecific: function (e) {
             this.lastPoint = {
@@ -175,7 +175,7 @@
     var rotatingFur = {
         init: function () {
             this.img = new Image();
-            this.img.src = '../../styles/images/brush2.png';
+            this.img.src = '../../styles/images/brushPattern.png';
             this.img.width = 10;
         },
         onMouseDownSpecific: function (e) {

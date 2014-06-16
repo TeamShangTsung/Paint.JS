@@ -30,7 +30,7 @@
         <div id="tools" class="container">
             <div id="pencil" class="tool"></div>
             <div id="text" class="tool"></div>
-            <div id="eraser" class="tool"></div>
+            <div id="eraser" class="tool" onclick="paint.toolbar.actions.eraser();"></div>
             <div id="tools-label" class="label">Tools</div>
         </div>
         <div id="brushes" class="container">
@@ -41,29 +41,32 @@
                     <div id="brush-1" class="brush-type" onclick="paint.toolbar.actions.startDrawing($(this));" data-brush-type="smoothingShadow">
 
                     </div>
-                    <div id="brush-2" class="brush-type" onclick="">
-                        
+                    <div id="brush-2" class="brush-type" onclick="paint.toolbar.actions.startDrawing($(this));" data-brush-type="brushFurPen">
+
                     </div>
-                    <div id="brush-3" class="brush-type">
-                        
+                    <div id="brush-3" class="brush-type" onclick="paint.toolbar.actions.startDrawing($(this));" data-brush-type="rotatingFur">
+
                     </div>
-                    <div id="brush-4" class="brush-type">
-                        
+                    <div id="brush-4" class="brush-type" onclick="paint.toolbar.actions.startDrawing($(this));" data-brush-type="spray">
+
                     </div>
-                    <div id="brush-5" class="brush-type">
-                        
+                    <div id="brush-5" class="brush-type" onclick="paint.toolbar.actions.startDrawing($(this));" data-brush-type="slicedPen">
+
                     </div>
-                    <div id="brush-6" class="brush-type">
-                        
+                    <div id="brush-6" class="brush-type" onclick="paint.toolbar.actions.startDrawing($(this));" data-brush-type="radialGradient">
+
                     </div>
-                    <div id="brush-7" class="brush-type">
-                        
+                    <div id="brush-7" class="brush-type" onclick="paint.toolbar.actions.startDrawing($(this));" data-brush-type="trailPen">
+
                     </div>
-                    <div id="brush-8" class="brush-type">
-                        
+                    <div id="brush-8" class="brush-type" onclick="paint.toolbar.actions.startDrawing($(this));" data-brush-type="randomRadius">
+
                     </div>
-                    <div id="brush-9" class="brush-type">
-                        
+                    <div id="brush-9" class="brush-type" onclick="paint.toolbar.actions.startDrawing($(this));" data-brush-type="customPen">
+
+                    </div>
+                    <div id="brush-10" class="brush-type" onclick="paint.toolbar.actions.startDrawing($(this));" data-brush-type="neighbourPoints">
+
                     </div>
                 </div>
             </div>

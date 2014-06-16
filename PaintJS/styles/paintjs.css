@@ -317,6 +317,19 @@ body {
     margin: 0;
 }
 
+#brush-10 {
+    background: url(images/brush-type-2.png) no-repeat;
+    background-position: 1px 1px;
+    margin: 1px;
+}
+
+#brush-10:hover {
+    background: url(images/brush-type-2.png) no-repeat;
+    background-position: 1px 1px;
+    border: 1px solid #B5D6F9;
+    margin: 0;
+}
+
 #shapes-container {
     background-color: white;
     border: 1px solid #EAEBEC;
