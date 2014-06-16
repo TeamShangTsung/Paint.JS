@@ -105,19 +105,22 @@ body {
 }
 
 #save {
-    background: url(images/floppy.jpg) no-repeat;
+    background: url(images/save.png) no-repeat;
+    background-position: 3px 3px;
 }
 
 #save:hover {
-    background: #E8EFF7 url(images/floppy.jpg) no-repeat;
+    background: #E8EFF7 url(images/save.png) no-repeat;
     border: 1px solid #B5D6F9;
     margin: 0;
+    background-position: 3px 3px;
 }
 
 #save:target {
-    background: #B5D6F9 url(images/floppy.jpg) no-repeat;
+    background: #B5D6F9 url(images/save.png) no-repeat;
     border: 1px solid #73ADE9;
     margin: 0;
+    background-position: 3px 3px;
 }
 
 #brush {
@@ -379,7 +382,9 @@ body {
 }
 
 #shapes {
-    width: 150px;
+    width: 200px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 #freehand {
@@ -438,7 +443,7 @@ body {
     width: 24px;
     height: 18px;
     background: url(images/circle.png) no-repeat;
-    background-position: 2px 0;
+    background-position: 2px 1px;
     margin: 1px;
 }
 
@@ -487,7 +492,7 @@ body {
 }
 
 #shapes-label {
-    left: 53px;
+    left: 97px;
 }
 
 #line-width-select {
@@ -596,5 +601,155 @@ body {
     margin: 0;
     background: #E8EFF7 url(images/line-width-4.png) no-repeat;
     background-position: 2px 6px;
+    border: 1px solid #B5D6F9;
+}
+
+#colors {
+    width: 450px;
+    border-right: none;
+}
+
+.color-container {
+    display: inline-block;
+    width: 50px;
+    padding: 5px;
+    font-size: 12px;
+    font-family: Consolas, 'Lucida Console', 'DejaVu Sans Mono', monospace;
+}
+
+.color-holder {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+    border: 1px solid black;
+}
+
+#color-1-holder {
+    background-color: black;
+}
+
+#color-2-holder {
+    background-color: white;
+}
+
+.color-container:hover {
+    background-color: #E8EFF7;
+    border: 1px solid #B5D6F9;
+}
+
+#color-1-container:target {
+    background-color: #B5D6F9;
+    border: 1px solid #73ADE9;
+}
+
+#color-2-container:target {
+    background-color: #B5D6F9;
+    border: 1px solid #73ADE9;
+}
+
+.color-picker{
+    height: 40px;
+    width: 40px;
+}
+
+#predifined-colors {
+    display: inline-block;
+    width: 260px;
+    position: relative;
+    top: -20px;
+}
+
+.color {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border: 1px solid black;
+}
+
+#black {
+    background-color: #000000;
+}
+
+#gray {
+    background-color: #7F7F7F;
+}
+
+#dark-red {
+    background-color: #880015;
+}
+
+#red {
+    background-color: #ED1C24;
+}
+
+#orange {
+    background-color: #FF7F27;
+}
+
+#yellow {
+    background-color: #FFF200;
+}
+
+#green {
+    background-color: #22B14C;
+}
+
+#blue {
+    background-color: #00A2E8;
+}
+
+#dark-blue {
+    background-color: #3F48CC;
+}
+
+#purple {
+    background-color: #A349A4;
+}
+
+#white {
+    background-color: #FFFFFF;
+}
+
+#light-gray {
+    background-color: #C3C3C3;
+}
+
+#brown {
+    background-color: #B97A57;
+}
+
+#pink {
+    background-color: #FFAEC9;
+}
+
+#light-orange {
+    background-color: #FFC90E;
+}
+
+#light-yellow {
+    background-color: #EFE4B0;
+}
+
+#light-green {
+    background-color: #B5E61D;
+}
+
+#sky-blue {
+    background-color: #99D9EA;
+}
+
+#light-blue {
+    background-color: #7092BE;
+}
+
+#light-purple {
+    background-color: #C8BFE7;
+}
+
+#colors-label {
+    left: 195px;
+}
+
+.color:hover {
     border: 1px solid #B5D6F9;
 }

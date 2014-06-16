@@ -23,7 +23,6 @@
     <script src="scripts/main/shape/paint.shape.chat.js"></script>
     <script src="scripts/main/shape/paint.shape.square.js"></script>
     <script src="scripts/main/shape/paint.shape.triangle.js"></script>
-
 </head>
 <body>
     <div id="toolbar-container">
@@ -94,8 +93,40 @@
             </div>
         </div>
         <div id="colors" class="container">
+        	<div id="color-1-container" class="color-container">
+        		<input type="color" id="color-picker-1" class="color-picker" value="#000000"/>
+        		Stroke color
+        	</div>
+        	<div id="color-2-container" class="color-container">
+        		<input type="color" id="color-picker-2" class="color-picker" value="#FFFFFF" />
+        		Fill color
+        	</div>
+        	<div id="predifined-colors">
+        		<div id="black" class="color"></div>
+        		<div id="gray" class="color"></div>
+        		<div id="dark-red" class="color"></div>
+        		<div id="red" class="color"></div>
+        		<div id="orange" class="color"></div>
 
-            <div class="label">Colors</div>
+        		<div id="yellow" class="color"></div>
+        		<div id="green" class="color"></div>
+        		<div id="blue" class="color"></div>
+        		<div id="dark-blue" class="color"></div>
+        		<div id="purple" class="color"></div>
+
+        		<div id="white" class="color"></div>
+        		<div id="light-gray" class="color"></div>
+        		<div id="brown" class="color"></div>
+        		<div id="pink" class="color"></div>
+        		<div id="light-orange" class="color"></div>
+
+        		<div id="light-yellow" class="color"></div>
+        		<div id="light-green" class="color"></div>
+        		<div id="sky-blue" class="color"></div>
+        		<div id="light-blue" class="color"></div>
+        		<div id="light-purple" class="color"></div>
+        	</div>
+            <div id="colors-label" class="label">Colors</div>
         </div>
     </div>
     <canvas id="canvasTemp" width="1000" height="389"></canvas>
