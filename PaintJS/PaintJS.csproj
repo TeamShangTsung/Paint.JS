@@ -57,6 +57,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="indexAnimate.html" />
+    <Content Include="scripts\main\effects\classie.js" />
     <Content Include="scripts\main\shape\paint.shape.chat.js" />
     <Content Include="scripts\main\shape\paint.shape.triangle.js" />
     <Content Include="scripts\main\shape\paint.shape.square.js" />
@@ -81,6 +83,7 @@
     <Content Include="scripts\main\paintjs.js" />
     <Content Include="scripts\libraries\raphael.js" />
     <Content Include="scripts\main\shape\paint.shape.js" />
+    <Content Include="styles\effects.css" />
     <Content Include="styles\images\arrow.png" />
     <Content Include="styles\images\brush-type-1.png" />
     <Content Include="styles\images\brush-type-2.png" />
@@ -109,6 +112,8 @@
     <Content Include="styles\images\pencil.png" />
     <Content Include="styles\images\rectangle.png" />
     <Content Include="styles\images\text.png" />
+    <Content Include="styles\mainPage.css" />
+    <Content Include="styles\normalize.css" />
     <Content Include="styles\paintjs.css" />
     <Content Include="Web.config" />
   </ItemGroup>

@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<title>Paint JS by Shang Tsung</title>
+		<link rel="stylesheet" type="text/css" href="styles/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="styles/mainPage.css" />
+		<link rel="stylesheet" type="text/css" href="styles/effects.css" />
+        <script src="scripts/libraries/jquery-1.11.1.js"></script>
+	</head>
+<body>
+    <!-- Loading effects -->
+    <div class="animatePie">
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="500" height="500" viewbox="0 0 500 500">
+            <path id="animatePie-border" transform="translate(250, 250)" />
+            <path id="animatePie-loader" transform="translate(250, 250) scale(0.9)" />
+        </svg>
+    </div>
+    <div class="animateCenterOut"></div>
+
+    <div class="animateBorders">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1 class="animateTitle" data-content="Paint JS by Shang Tsung">Paint JS by Shang Tsung</h1>
+        </header>
+        <div class="main">
+            <div id="la-buttons" class="column">
+                <button data-anim="animateCenterOut">Centered Expanding Line</button>
+                <button data-anim="animateBorders">Surrounding Borders</button>
+                <button data-anim="animatePie">Pie Timer</button>
+                <button data-anim="animateTitle">Filling Title</button>
+            </div>
+        </div>
+    </div>
+    <script src="scripts/main/effects/classie.js"></script>
+    <script>
+        var loader = document.getElementById('animatePie-loader'),
+            border = document.getElementById('animatePie-border'),
+            α = 0,
+            π = Math.PI,
+            t = 15,
+            tdraw;
+
+        function PieDraw() {
+            α++;
+            α %= 360;
+
+            var r = (α * π / 180),
+                x = Math.sin(r) * 250,
+                y = Math.cos(r) * -250,
+                mid = (α > 180) ? 1 : 0,
+                anim = 'M 0 0 v -250 A 250 250 1 ' + mid + ' 1 ' + x + ' ' + y + ' z';
+
+            loader.setAttribute('d', anim);
+            border.setAttribute('d', anim);
+
+            if (α != 0) tdraw = setTimeout(PieDraw, t); // Redraw
+        }
+
+        function PieReset() {
+            clearTimeout(tdraw);
+            var anim = 'M 0 0 v -250 A 250 250 1 0 1 0 -250 z';
+
+            loader.setAttribute('d', anim);
+            border.setAttribute('d', anim);
+        }
+
+        /*Array.prototype.slice.call(document.querySelectorAll('#la-buttons > button')).forEach(function (el, i) {
+            var anim = el.getAttribute('data-anim'),
+                animEl = document.querySelector('.' + anim);
+
+            console.log(anim);
+            console.log(animEl);
+
+            classie.add(animEl, 'la-animate');
+            if (anim === 'animatePie') PieDraw();
+
+            setTimeout(function () {
+                classie.remove(animEl, 'la-animate');
+                if (anim === 'animatePie') PieReset();
+            }, 10000);
+        });*/
+
+        var inProgress = false;
+
+        Array.prototype.slice.call(document.querySelectorAll('#la-buttons > button')).forEach(function (el, i) {
+            var anim = el.getAttribute('data-anim'),
+                animEl = document.querySelector('.' + anim);
+
+            el.addEventListener('click', function () {
+                if (inProgress) return false;
+                inProgress = true;
+                classie.add(animEl, 'la-animate');
+                if (anim === 'animatePie') PieDraw();
+
+                setTimeout(function () {
+                    classie.remove(animEl, 'la-animate');
+                    if (anim === 'animatePie') PieReset();
+                    inProgress = false;
+                }, 10000);
+
+            });
+        });
+    </script>
+</body>
+</html>
