@@ -59,6 +59,7 @@
   <ItemGroup>
     <Content Include="indexAnimate.html" />
     <Content Include="scripts\main\effects\classie.js" />
+    <Content Include="scripts\main\effects\load-effects.js" />
     <Content Include="scripts\main\shape\paint.shape.chat.js" />
     <Content Include="scripts\main\shape\paint.shape.triangle.js" />
     <Content Include="scripts\main\shape\paint.shape.square.js" />
