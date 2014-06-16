@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<title>Paint JS by Shang Tsung</title>
+		<link rel="stylesheet" type="text/css" href="styles/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="styles/mainPage.css" />
+		<link rel="stylesheet" type="text/css" href="styles/effects.css" />
+	</head>
+<body>
+    <!-- Loading effects -->
+    <div class="animatePie">
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="500" height="500" viewbox="0 0 500 500">
+            <path id="animatePie-border" transform="translate(250, 250)" />
+            <path id="animatePie-loader" transform="translate(250, 250) scale(0.9)" />
+        </svg>
+    </div>
+    <div class="animateCenterOut"></div>
+
+    <div class="animateBorders">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1 class="animateTitle" data-content="Paint JS by Shang Tsung">Paint JS by Shang Tsung</h1>
+        </header>
+    </div>
+    <script src="scripts/main/effects/classie.js"></script>
+    <script src="scripts/main/effects/load-effects.js"></script>
+    <script>
+        setTimeout(function () {
+            window.location = "index.html";
+        }, 10000);
+    </script>
+</body>
+</html>
