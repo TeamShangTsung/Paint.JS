@@ -19,6 +19,7 @@
             type: brushtype,
             lineWidth: lineWidth
         };
+        paint.canvas.currentBrush = brushtype;
         paint.canvas.drawing(brushObject);
     };
 

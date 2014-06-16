@@ -4,6 +4,8 @@
 
     var animationPath = [];
 
+    me.currentBrush = undefined;
+
     me.drawing = function (arguments) {
         var isDrawing;
         var currentBrush = undefined;
@@ -103,6 +105,16 @@
         // Restore the transform
         ctx.restore();
     }
+
+    me.changeLineWidth = function (lineWidth) {
+        lineWidth = lineWidth || 5;
+        paint.ctx.lineWidth = lineWidth;
+
+        if (me.currentBrush) {
+            var currentBrush = brushes[me.currentBrush];
+            currentBrush.init();
+        }
+    };
 
     //Brush types
     var smoothingShadow = {

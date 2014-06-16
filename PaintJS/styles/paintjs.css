@@ -516,6 +516,7 @@ body {
     background-color: white;
     border: 1px solid black;
     display: none;
+    z-index:1000;
 }
 
 #toolbar-container #line-width #line-width-select:target #line-width-container {

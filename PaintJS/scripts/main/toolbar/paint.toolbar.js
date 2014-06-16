@@ -25,5 +25,12 @@
             }
         });
 
+        //Change current line width 
+        $('#toolbar-container').on('click', '.line-width-type', function (e) {
+            var currentWidth = $(this).attr('data-line-width');
+            $(this).closest('#line-width').attr('data-line-width', currentWidth);
+            paint.canvas.changeLineWidth(currentWidth);
+        });
+        
     });
 })(window.paint = window.paint || {}, jQuery);
