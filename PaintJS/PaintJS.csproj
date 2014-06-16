@@ -97,6 +97,7 @@
     <Content Include="styles\images\circle.png" />
     <Content Include="styles\images\eraser.png" />
     <Content Include="styles\images\fill.png" />
+    <Content Include="styles\images\floppy.jpg" />
     <Content Include="styles\images\freehand.png" />
     <Content Include="styles\images\line-width-1.png" />
     <Content Include="styles\images\line-width-2.png" />
