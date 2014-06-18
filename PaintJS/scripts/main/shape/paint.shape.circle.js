@@ -3,11 +3,10 @@
     paint.shape.circle = function () {
         // Call the parent constructor
         paint.shape.call(this)
-        paint.canvasElement.addEventListener("mousedown", this.onMouseDown);
+        $(paint.canvasElement).on("mousedown", this.onMouseDown);
 
         var self = this;
         var ctx = paint.ctx;
-        var canvas = paint.canvasElement;
 
         function drawCircle(target) {
             var radius = Math.abs(self.startPosition.x - self.finalPosition.x);
@@ -15,6 +14,9 @@
             target.arc(self.startPosition.x, self.startPosition.y, radius, 0, 2 * Math.PI);
             target.stroke();
         }
+
+        paint.shape.prototype.cleanEvents();
+        paint.shape.prototype.attachMouseDown();
 
         // override base methods
         paint.shape.circle.prototype.onMouseMove = function (ev) {
@@ -25,7 +27,7 @@
             //ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
             drawCircle(ctx);
 
-            canvas.addEventListener("mouseup", self.onMouseUp);
+            $(paint.canvasElement).on("mouseup", self.onMouseUp);
         }
 
         paint.shape.circle.prototype.onMouseUp = function (ev) {

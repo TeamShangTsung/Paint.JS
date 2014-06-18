@@ -2,12 +2,11 @@
 	//Constructor
 	paint.shape.line = function () {
 		// Call the parent constructor
-		paint.shape.call(this)
-		paint.canvasElement.addEventListener("mousedown", this.onMouseDown);
+	    paint.shape.call(this);
+	    $(paint.canvasElement).on("mousedown", this.onMouseDown);
 
 		var self = this;
 		var ctx = paint.ctx;
-		var canvas = paint.canvasElement;
 
 		function drawLine(target) {
 		    target.beginPath();
@@ -16,15 +15,18 @@
 		    target.stroke();
 		}
 
+		paint.shape.prototype.cleanEvents();
+		paint.shape.prototype.attachMouseDown();
+
 		//override base methods
 		paint.shape.line.prototype.onMouseMove = function (ev) {
 			//call base method
 			paint.shape.prototype.onMouseMove(ev);
 
-			ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+			ctx.clearRect(0, 0, paint.canvasElement.clientWidth, paint.canvasElement.clientHeight);
 			drawLine(ctx);
 
-			canvas.addEventListener("mouseup", self.onMouseUp);
+			$(paint.canvasElement).on("mouseup", self.onMouseUp);
 		}
 
 		paint.shape.line.prototype.onMouseUp = function (ev) {

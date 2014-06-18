@@ -3,11 +3,10 @@
     paint.shape.rectangle = function () {
         // Call the parent constructor
         paint.shape.call(this)
-        paint.canvasElement.addEventListener("mousedown", this.onMouseDown);
+        $(paint.canvasElement).on("mousedown", this.onMouseDown);
 
         var self = this;
         var ctx = paint.ctx;
-        var canvas = paint.canvasElement;
 
         function drawRectangle(target) {
             target.beginPath();
@@ -19,6 +18,9 @@
             target.stroke();
         }
 
+        paint.shape.prototype.cleanEvents();
+        paint.shape.prototype.attachMouseDown();
+
         //override base methods
         paint.shape.rectangle.prototype.onMouseMove = function (ev) {
             //call base method
@@ -28,7 +30,7 @@
             //ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
             drawRectangle(ctx);
 
-            canvas.addEventListener("mouseup", self.onMouseUp);
+            $(paint.canvasElement).on("mouseup", self.onMouseUp);
         }
 
         paint.shape.rectangle.prototype.onMouseUp = function (ev) {

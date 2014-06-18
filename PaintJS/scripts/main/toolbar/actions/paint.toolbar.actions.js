@@ -17,14 +17,12 @@
     };
 
     me.startDrawing = function (target) {
-        var lineWidth = parseInt($('#line-width').attr('data-line-width'));
-        var strokeColor = $('#color-picker-1').val();
-        var fillColor = $('#color-picker-2').val();
-        
+        var options = getOptions();
+
         var brushObject = {
-            lineWidth: lineWidth,
-            strokeColor: strokeColor,
-            fillColor: fillColor
+            lineWidth: options.lineWidth,
+            strokeColor: options.strokeColor,
+            fillColor: options.fillColor
         };
 
         //Clean predifined options for the canvas
@@ -39,6 +37,30 @@
         paint.canvas.drawing(brushObject);
     };
 
+    me.selectedShape = undefined;
+
+    me.drawShapes = function (target) {
+        var options = getOptions();
+        var shapeType = target.attr('id');
+        if (me.selectedShape) {
+            me.selectedShape = undefined;
+        }
+
+        switch (shapeType) {
+            case 'line':
+                me.selectedShape = new paint.shape.line();
+                break;
+            case 'rectangle':
+                me.selectedShape = new paint.shape.rectangle();
+                break;
+            case 'circle':
+                me.selectedShape = new paint.shape.circle();
+                break;
+            default:
+                return;
+        }
+    };
+
     me.downloadDrawing = function (name) {
         var url = paint.canvasElement.toDataURL();
         name = name || "paintJS";
@@ -48,5 +70,17 @@
         link.href = url;
         link.click();
     };
+
+    function getOptions() {
+        var lineWidth = parseInt($('#line-width').attr('data-line-width'));
+        var strokeColor = $('#color-picker-1').val();
+        var fillColor = $('#color-picker-2').val();
+
+        return {
+            lineWidth: lineWidth,
+            strokeColor: strokeColor,
+            fillColor: fillColor
+        };
+    }
 
 })(window.paint = window.paint || {}, jQuery);
