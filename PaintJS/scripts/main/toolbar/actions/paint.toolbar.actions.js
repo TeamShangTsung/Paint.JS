@@ -16,6 +16,95 @@
         });
     };
 
+    me.fill = function(){
+        paint.canvas.clearPreDefinedOptions();
+        paint.canvasElement.onclick = function(e) {
+
+            console.log(paint.ctxTemp.getImageData(e.clientX, e.clientY, 1, 1));
+
+            var colorLayer = paint.ctxTemp.getImageData(0,0,paint.canvasTemp.offsetWidth,paint.canvasTemp.offsetHeight),
+            pixelStack = [[e.clientX, e.clientY]];
+
+            var fillColorR = 255,
+            fillColorG = 0,
+            fillColorB = 0;
+
+            while(pixelStack.length)
+            {
+                var newPos, x, y, pixelPos, reachLeft, reachRight;
+                newPos = pixelStack.pop();
+                x = newPos[0];
+                y = newPos[1];
+
+                pixelPos = (y*paint.canvasTemp.offsetWidth + x) * 4;
+                while(y-- >= 0 && matchStartColor(pixelPos))
+                {
+                    pixelPos -= paint.canvasTemp.offsetWidth * 4;
+                }
+                pixelPos += paint.canvasTemp.offsetWidth * 4;
+                ++y;
+                reachLeft = false;
+                reachRight = false;
+                while(y++ < paint.canvasTemp.offsetHeight-1 && matchStartColor(pixelPos))
+                {
+                    colorPixel(pixelPos);
+
+                    if(x > 0)
+                    {
+                        if(matchStartColor(pixelPos - 4))
+                        {
+                            if(!reachLeft){
+                                pixelStack.push([x - 1, y]);
+                                reachLeft = true;
+                            }
+                        }
+                        else if(reachLeft)
+                        {
+                            reachLeft = false;
+                        }
+                    }
+
+                    if(x < paint.canvasTemp.offsetWidth-1)
+                    {
+                        if(matchStartColor(pixelPos + 4))
+                        {
+                            if(!reachRight)
+                            {
+                                pixelStack.push([x + 1, y]);
+                                reachRight = true;
+                            }
+                        }
+                        else if(reachRight)
+                        {
+                            reachRight = false;
+                        }
+                    }
+
+                    pixelPos += paint.canvasTemp.offsetWidth * 4;
+                }
+            }
+            paint.ctxTemp.putImageData(colorLayer, 0, 0);
+
+            function matchStartColor(pixelPos)
+            {
+                var r = colorLayer.data[pixelPos];
+                var g = colorLayer.data[pixelPos+1];
+                var b = colorLayer.data[pixelPos+2];
+
+                return (r == 0 && g == 0 && b == 0);
+                //return (r == startR && g == startG && b == startB);
+            }
+
+            function colorPixel(pixelPos)
+            {
+                colorLayer.data[pixelPos] = fillColorR;
+                colorLayer.data[pixelPos+1] = fillColorG;
+                colorLayer.data[pixelPos+2] = fillColorB;
+                colorLayer.data[pixelPos+3] = 255;
+            }
+        }
+    };
+
     me.startDrawing = function (target) {
         var options = getOptions();
 
