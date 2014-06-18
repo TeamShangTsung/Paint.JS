@@ -9,7 +9,6 @@
     me.drawing = function (arguments) {
         var isDrawing;
         var currentBrush = undefined;
-        var drawingPath = [];
 
         //default values
         paint.ctx.lineJoin = 'round';
@@ -39,7 +38,6 @@
             paint.ctx.moveTo(e.clientX, e.clientY);
 
             animationPath.push({x: e.clientX, y: e.clientY});
-            drawingPath.push({x: e.clientX, y: e.clientY});
 
             if (currentBrush && currentBrush.onMouseDownSpecific) {
                 currentBrush.onMouseDownSpecific(e);
@@ -49,7 +47,6 @@
         $(paint.canvasElement).on("mousemove", function (e) {
             if (isDrawing) {
                 animationPath.push({ x: e.clientX, y: e.clientY });
-                drawingPath.push({ x: e.clientX, y: e.clientY });
 
                 if (!currentBrush || !currentBrush.action) {
                     paint.ctx.lineTo(e.clientX, e.clientY);
@@ -63,8 +60,7 @@
         $(paint.canvasElement).on("mouseup", function () {
             isDrawing = false;
             animationPath.push({ x: "skip", y: "skip" });
-            me.writeDrawingToMainCanvas(drawingPath);
-            drawingPath = [];
+
             if (currentBrush && currentBrush.onMouseUpSpecific) {
                 currentBrush.onMouseUpSpecific();
             }
@@ -72,7 +68,7 @@
     }
 
     me.animateDrawing = function(){
-        var ctx = paint.ctxTemp,
+        var ctx = paint.ctx,
             index = 0;
 
         me.clearCanvasTemp();
@@ -97,16 +93,6 @@
             window.requestAnimationFrame(drawAnimation);
         }
         drawAnimation();
-    };
-
-    me.writeDrawingToMainCanvas = function (points) {
-        paint.ctxTemp.beginPath();
-        paint.ctxTemp.moveTo(points[0]['x'], points[0]['y']);
-
-        for (var i = 0; i < points.length; i++) {
-            paint.ctxTemp.lineTo(points[i]['x'], points[i]['y']);
-            paint.ctxTemp.stroke();
-        }
     };
 
     me.clearPreDefinedOptions = function () {

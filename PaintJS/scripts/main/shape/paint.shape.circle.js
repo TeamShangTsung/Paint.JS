@@ -25,8 +25,8 @@
             // call base method
             paint.shape.prototype.onMouseMove(ev);
 
-            paint.canvas.clearCanvas();
-            drawCircle(ctx);
+            paint.canvas.clearCanvasTemp();
+            drawCircle(paint.ctxTemp);
 
             $(paint.canvasElement).on("mouseup", self.onMouseUp);
         }
@@ -34,7 +34,7 @@
         paint.shape.circle.prototype.onMouseUp = function (ev) {
             //call base method
             paint.shape.prototype.onMouseUp(ev);
-            drawCircle(paint.ctxTemp);
+            drawCircle(ctx);
         }
     }
 

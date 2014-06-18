@@ -64,16 +64,12 @@
                 stepX = -5;
             }
 
-            // else stepX = 0 it is default
-
             stepCount = Math.abs((self.finalPosition.x - self.startPosition.x) / stepX);
             stepY = Math.abs((self.finalPosition.y - self.startPosition.y) / stepCount);
 
             if (self.startPosition.y > self.finalPosition.y) {
                 stepY *= -1;
             }
-
-            var multiplier = Math.abs((self.finalPosition.x - self.startPosition.x) / stepCount);
         }
 
         paint.shape.prototype.cleanEvents = function (e) {
