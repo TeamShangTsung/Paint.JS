@@ -9,24 +9,22 @@
     me.drawing = function (arguments) {
         var isDrawing;
         var currentBrush = undefined;
-        var ctx = paint.ctx;
-        var canvasElement = paint.canvasElement;
 
         //default values
-        ctx.lineJoin = 'round';
-        ctx.lineCap = 'round';
+        paint.ctx.lineJoin = 'round';
+        paint.ctx.lineCap = 'round';
 
         if (arguments) {
             if (arguments.lineWidth) {
-                ctx.lineWidth = arguments.lineWidth;
+                paint.ctx.lineWidth = arguments.lineWidth;
             }
 
             if (arguments.strokeColor) {
-                ctx.strokeStyle = arguments.strokeColor;
+                paint.ctx.strokeStyle = arguments.strokeColor;
             }
 
             if (arguments.fillColor) {
-                ctx.fillColor = arguments.fillColor;
+                paint.ctx.fillStyle = arguments.fillColor;
             }
 
             if (arguments.type) {
@@ -35,9 +33,9 @@
             }
         }
 
-        canvasElement.onmousedown = function (e) {
+        paint.canvasElement.onmousedown = function (e) {
             isDrawing = true;
-            ctx.moveTo(e.clientX, e.clientY);
+            paint.ctx.moveTo(e.clientX, e.clientY);
             animationPath.push({x: e.clientX, y: e.clientY});
 
             if (currentBrush && currentBrush.onMouseDownSpecific) {
@@ -45,11 +43,11 @@
             }
         };
 
-        canvasElement.onmousemove = function (e) {
+        paint.canvasElement.onmousemove = function (e) {
             if (isDrawing) {
                 if (!currentBrush || !currentBrush.action) {
-                    ctx.lineTo(e.clientX, e.clientY);
-                    ctx.stroke();
+                    paint.ctx.lineTo(e.clientX, e.clientY);
+                    paint.ctx.stroke();
                     animationPath.push({x: e.clientX, y: e.clientY});
                 } else {
                     currentBrush.action(e);
@@ -57,7 +55,7 @@
             }
         };
 
-        canvasElement.onmouseup = function () {
+        paint.canvasElement.onmouseup = function () {
             isDrawing = false;
             if (currentBrush && currentBrush.onMouseUpSpecific) {
                 currentBrush.onMouseUpSpecific();
@@ -88,11 +86,17 @@
         drawAnimation();
     };
 
-    me.stopDrawing = function () {
-        var canvasElement = paint.canvasElement;
-        canvasElement.onmousedown = undefined;
-        canvasElement.onmousemove = undefined;
-        canvasElement.onmouseup = undefined;
+    me.clearPreDefinedOptions = function () {
+        paint.canvasElement.onmousedown = undefined;
+        paint.canvasElement.onmousemove = undefined;
+        paint.canvasElement.onmouseup = undefined;
+
+        var clearColor = "white";
+
+        paint.ctx.fillStyle = clearColor;
+        paint.ctx.strokeStyle = clearColor;
+        paint.ctx.shadowColor = clearColor;
+        paint.ctx.shadowBlur = 0;
     }
 
     me.clearCanvas = function () {

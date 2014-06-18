@@ -5,26 +5,37 @@
     me.eraser = function (eraserWidth) {
         var eraserWidth = eraserWidth || 5;
 
+        //Clean predifined options for the canvas
+        paint.canvas.clearPreDefinedOptions();
+
         paint.canvas.drawing({
             type: 'eraser',
             lineWidth: eraserWidth,
-            strokeColor: 'white'
+            strokeColor: 'white',
+            fillColor: 'white'
         });
     };
 
     me.startDrawing = function (target) {
-        var brushtype = target.attr('data-brush-type');
         var lineWidth = parseInt($('#line-width').attr('data-line-width'));
         var strokeColor = $('#color-picker-1').val();
         var fillColor = $('#color-picker-2').val();
-
+        
         var brushObject = {
-            type: brushtype,
             lineWidth: lineWidth,
             strokeColor: strokeColor,
             fillColor: fillColor
         };
-        paint.canvas.currentBrush = brushtype;
+
+        //Clean predifined options for the canvas
+        paint.canvas.clearPreDefinedOptions();
+
+        var brushtype = target.attr('data-brush-type');
+        if (brushtype) {
+            brushObject.type = brushtype;
+            paint.canvas.currentBrush = brushtype;
+        }
+
         paint.canvas.drawing(brushObject);
     };
 
