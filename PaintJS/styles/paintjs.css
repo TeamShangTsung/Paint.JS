@@ -72,6 +72,22 @@ body {
     margin: 0;
 }
 
+#colorPicker {
+    background: url(images/colorPicker.png) no-repeat;
+}
+
+#colorPicker:hover {
+    background: #E8EFF7 url(images/colorPicker.png) no-repeat;
+    border: 1px solid #B5D6F9;
+    margin: 0;
+}
+
+#colorPicker:target {
+    background: #B5D6F9 url(images/colorPicker.png) no-repeat;
+    border: 1px solid #73ADE9;
+    margin: 0;
+}
+
 #text {
     background: url(images/text.png) no-repeat;
 }
@@ -118,6 +134,25 @@ body {
 
 #save:target {
     background: #B5D6F9 url(images/save.png) no-repeat;
+    border: 1px solid #73ADE9;
+    margin: 0;
+    background-position: 3px 3px;
+}
+
+#trash {
+    background: url(images/trash.png) no-repeat;
+    background-position: 3px 3px;
+}
+
+#trash:hover {
+    background: #E8EFF7 url(images/trash.png) no-repeat;
+    border: 1px solid #B5D6F9;
+    margin: 0;
+    background-position: 3px 3px;
+}
+
+#trash:target {
+    background: #B5D6F9 url(images/trash.png) no-repeat;
     border: 1px solid #73ADE9;
     margin: 0;
     background-position: 3px 3px;
