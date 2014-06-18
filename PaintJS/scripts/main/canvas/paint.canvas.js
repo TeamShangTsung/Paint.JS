@@ -57,6 +57,7 @@
 
         paint.canvasElement.onmouseup = function () {
             isDrawing = false;
+            animationPath.push({ x: "skip", y: "skip" });
             if (currentBrush && currentBrush.onMouseUpSpecific) {
                 currentBrush.onMouseUpSpecific();
             }
@@ -69,7 +70,6 @@
             index = 0;
 
         me.clearCanvas();
-        //ctx.clearRect(0, 100, canvasElement.clientWidth, canvasElement.clientHeight);
         ctx.beginPath();
         ctx.moveTo(animationPath[0]['x'], animationPath[0]['y']);
 
@@ -78,8 +78,14 @@
                 return;
             }
             index += 1;
-            ctx.lineTo(animationPath[index]['x'], animationPath[index]['y']);
-            ctx.stroke();
+            if (animationPath[index]['x'] !== "skip") {
+                ctx.lineTo(animationPath[index]['x'], animationPath[index]['y']);
+                ctx.stroke();
+            } else {
+                if (index+1 < animationPath.length) {
+                    ctx.moveTo(animationPath[index+1]['x'], animationPath[index+1]['y']);
+                }
+            }
 
             window.requestAnimationFrame(drawAnimation);
         }

@@ -7,16 +7,22 @@ body {
     border: 1px solid black;
     width: 1000px;
     height: 500px;
-    margin: 50px;
+    margin: auto;
+    background-color:lightskyblue;
 }
 
 #canvasTemp {
     display: block;
-    background-color: transparent;
+    background-color: white;
 }
 
 #canvas, #canvasTemp {
     position: absolute;
+    
+}
+
+#canvas {
+    background-color:transparent;
 }
 
 #toolbar-container {
