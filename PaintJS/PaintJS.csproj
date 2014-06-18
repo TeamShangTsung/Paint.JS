@@ -99,6 +99,7 @@
     <Content Include="styles\images\brushPattern.png" />
     <Content Include="styles\images\chat.png" />
     <Content Include="styles\images\circle.png" />
+    <Content Include="styles\images\colorPicker.png" />
     <Content Include="styles\images\eraser.png" />
     <Content Include="styles\images\fill.png" />
     <Content Include="styles\images\floppy.jpg" />
