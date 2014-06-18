@@ -31,8 +31,8 @@
             //call base method
             paint.shape.prototype.onMouseMove(ev);
 
-            paint.canvas.clearCanvas();
-            drawChat(paint.ctx);
+            paint.canvas.clearCanvasTemp();
+            drawChat(paint.ctxTemp);
 
             $(paint.canvasElement).on("mouseup", self.onMouseUp);
         }
@@ -40,7 +40,7 @@
         paint.shape.chat.prototype.onMouseUp = function (ev) {
             //call base method
             paint.shape.prototype.onMouseUp(ev);
-            drawChat(paint.ctxTemp);
+            drawChat(paint.ctx);
         }
     }
 

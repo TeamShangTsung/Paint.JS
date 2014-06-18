@@ -24,8 +24,8 @@
 			//call base method
 			paint.shape.prototype.onMouseMove(ev);
             
-			paint.canvas.clearCanvas();
-			drawLine(ctx);
+			paint.canvas.clearCanvasTemp();
+			drawLine(paint.ctxTemp);
 
 			$(paint.canvasElement).on("mouseup", self.onMouseUp);
 		}
@@ -33,7 +33,7 @@
 		paint.shape.line.prototype.onMouseUp = function (ev) {
 		    //call base method
 		    paint.shape.prototype.onMouseUp(ev);
-		    drawLine(paint.ctxTemp);
+		    drawLine(ctx);
 		}
 	}
 

@@ -31,8 +31,8 @@
             //call base method
             paint.shape.prototype.onMouseMove(ev);
 
-            paint.canvas.clearCanvas();
-            drawRectangle(ctx);
+            paint.canvas.clearCanvasTemp();
+            drawRectangle(paint.ctxTemp);
 
             $(paint.canvasElement).on("mouseup", self.onMouseUp);
         }
@@ -40,7 +40,7 @@
         paint.shape.rectangle.prototype.onMouseUp = function (ev) {
             //call base method
             paint.shape.prototype.onMouseUp(ev);
-            drawRectangle(paint.ctxTemp);
+            drawRectangle(ctx);
         }
     }
 
