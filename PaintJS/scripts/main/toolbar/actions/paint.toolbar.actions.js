@@ -168,13 +168,17 @@
 
         var canvasElement = paint.canvasTemp;
         var ctx = paint.ctxTemp;
+
         ctx.save();
+
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
         ctx.restore();
     }
 
     me.getPixelColor = function () {
+        paint.canvas.clearPreDefinedOptions();
         $(paint.canvasElement).on("click", function (e) {
             function componentToHex(c) {
                 var hex = c.toString(16);
