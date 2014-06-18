@@ -19,88 +19,109 @@
     me.fill = function(){
         paint.canvas.clearPreDefinedOptions();
         paint.canvasElement.onclick = function(e) {
+            var fillColor = $('#color-picker-2').val()
 
-            console.log(paint.ctxTemp.getImageData(e.clientX, e.clientY, 1, 1));
+            floodFill(e.clientX - 183, e.clientY - 111, paint.ctx, fillColor, 10);
 
-            var colorLayer = paint.ctxTemp.getImageData(0,0,paint.canvasTemp.offsetWidth,paint.canvasTemp.offsetHeight),
-            pixelStack = [[e.clientX, e.clientY]];
-
-            var fillColorR = 255,
-            fillColorG = 0,
-            fillColorB = 0;
-
-            while(pixelStack.length)
-            {
-                var newPos, x, y, pixelPos, reachLeft, reachRight;
-                newPos = pixelStack.pop();
-                x = newPos[0];
-                y = newPos[1];
-
-                pixelPos = (y*paint.canvasTemp.offsetWidth + x) * 4;
-                while(y-- >= 0 && matchStartColor(pixelPos))
-                {
-                    pixelPos -= paint.canvasTemp.offsetWidth * 4;
-                }
-                pixelPos += paint.canvasTemp.offsetWidth * 4;
-                ++y;
-                reachLeft = false;
-                reachRight = false;
-                while(y++ < paint.canvasTemp.offsetHeight-1 && matchStartColor(pixelPos))
-                {
-                    colorPixel(pixelPos);
-
-                    if(x > 0)
-                    {
-                        if(matchStartColor(pixelPos - 4))
-                        {
-                            if(!reachLeft){
-                                pixelStack.push([x - 1, y]);
-                                reachLeft = true;
+            function floodFill(x,y,context,color,tolerance){
+                pixelStack = [[x,y]];
+                width = context.canvas.width;
+                height = context.canvas.height;
+                pixelPos = (y*width + x) * 4;
+                imageData =  context.getImageData(0, 0, width, height);
+                startR = imageData.data[pixelPos];
+                startG = imageData.data[pixelPos+1];
+                startB = imageData.data[pixelPos+2];
+                while(pixelStack.length){
+                    newPos = pixelStack.pop();
+                    x = newPos[0];
+                    y = newPos[1];
+                    pixelPos = (y*width + x) * 4;
+                    while(y-- >= 0 && floodfill_matchTolerance(pixelPos,color,tolerance)){
+                        pixelPos -= width * 4;
+                    }
+                    pixelPos += width * 4;
+                    ++y;
+                    reachLeft = false;
+                    reachRight = false;
+                    while(y++ < height-1 && floodfill_matchTolerance(pixelPos,color,tolerance)){
+                        floodfill_colorPixel(pixelPos,color);
+                        if(x > 0){
+                            if(floodfill_matchTolerance(pixelPos - 4,color,tolerance)) {
+                                if(!reachLeft){
+                                    pixelStack.push([x - 1, y]);
+                                    reachLeft = true;
+                                }
+                            }
+                            else if(reachLeft){
+                                reachLeft = false;
                             }
                         }
-                        else if(reachLeft)
-                        {
-                            reachLeft = false;
-                        }
-                    }
-
-                    if(x < paint.canvasTemp.offsetWidth-1)
-                    {
-                        if(matchStartColor(pixelPos + 4))
-                        {
-                            if(!reachRight)
-                            {
-                                pixelStack.push([x + 1, y]);
-                                reachRight = true;
+                        if(x < width-1){
+                            if(floodfill_matchTolerance(pixelPos + 4,color,tolerance)){
+                                if(!reachRight){
+                                    pixelStack.push([x + 1, y]);
+                                    reachRight = true;
+                                }
+                            }
+                            else if(floodfill_matchTolerance(pixelPos + 4 -(width *4),color,tolerance)) {
+                                if(!reachLeft){
+                                    pixelStack.push([x + 1, y - 1]);
+                                    reachLeft = true;
+                                }
+                            }
+                            else if(reachRight){
+                                reachRight = false;
                             }
                         }
-                        else if(reachRight)
-                        {
-                            reachRight = false;
-                        }
+                        pixelPos += width * 4;
                     }
-
-                    pixelPos += paint.canvasTemp.offsetWidth * 4;
                 }
-            }
-            paint.ctxTemp.putImageData(colorLayer, 0, 0);
-
-            function matchStartColor(pixelPos)
-            {
-                var r = colorLayer.data[pixelPos];
-                var g = colorLayer.data[pixelPos+1];
-                var b = colorLayer.data[pixelPos+2];
-
-                return (r == 0 && g == 0 && b == 0);
-                //return (r == startR && g == startG && b == startB);
+                context.putImageData(imageData, 0, 0);
             }
 
-            function colorPixel(pixelPos)
-            {
-                colorLayer.data[pixelPos] = fillColorR;
-                colorLayer.data[pixelPos+1] = fillColorG;
-                colorLayer.data[pixelPos+2] = fillColorB;
-                colorLayer.data[pixelPos+3] = 255;
+            function floodfill_hexToR(h) {
+                return parseInt((floodfill_cutHex(h)).substring(0,2),16)
+            }
+            function floodfill_hexToG(h) {
+                return parseInt((floodfill_cutHex(h)).substring(2,4),16)
+            }
+            function floodfill_hexToB(h) {
+                return parseInt((floodfill_cutHex(h)).substring(4,6),16)
+            }
+            function floodfill_cutHex(h) {
+                return (h.charAt(0)=="#") ? h.substring(1,7):h
+            }
+
+            function floodfill_matchTolerance(pixelPos,color,tolerance){
+                var rMax = startR + (startR * (tolerance / 100));
+                var gMax = startG + (startG * (tolerance / 100));
+                var bMax = startB + (startB * (tolerance / 100));
+
+                var rMin = startR - (startR * (tolerance / 100));
+                var gMin = startG - (startG * (tolerance / 100));
+                var bMin = startB - (startB * (tolerance / 100));
+
+                var r = imageData.data[pixelPos];
+                var g = imageData.data[pixelPos+1];
+                var b = imageData.data[pixelPos+2];
+
+                return ((
+                    (r >= rMin && r <= rMax)
+                    && (g >= gMin && g <= gMax)
+                    && (b >= bMin && b <= bMax)
+                    )
+                    && !(r == floodfill_hexToR(color)
+                        && g == floodfill_hexToG(color)
+                        && b == floodfill_hexToB(color))
+                    );
+            }
+
+            function floodfill_colorPixel(pixelPos,color){
+                imageData.data[pixelPos] = floodfill_hexToR(color);
+                imageData.data[pixelPos+1] = floodfill_hexToG(color);
+                imageData.data[pixelPos+2] = floodfill_hexToB(color);
+                imageData.data[pixelPos+3] = 255;
             }
         }
     };
@@ -165,11 +186,16 @@
 
     me.eraseCanvasContent = function () {
         paint.canvas.clearCanvas();
-        paint.canvas.clearCanvasTemp();
+
+        var canvasElement = paint.canvasTemp;
+        var ctx = paint.ctxTemp;
+        ctx.save();
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+        ctx.restore();
     }
 
     me.getPixelColor = function () {
-        paint.canvas.clearPreDefinedOptions();
         $(paint.canvasElement).on("click", function (e) {
             function componentToHex(c) {
                 var hex = c.toString(16);
