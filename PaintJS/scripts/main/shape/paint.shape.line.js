@@ -1,6 +1,6 @@
 ﻿(function (paint, $, undefined) {
 	//Constructor
-	paint.shape.line = function () {
+	paint.shape.line = function (options) {
 		// Call the parent constructor
 	    paint.shape.call(this);
 	    $(paint.canvasElement).on("mousedown", this.onMouseDown);
@@ -15,6 +15,7 @@
 		    target.stroke();
 		}
 
+		paint.shape.prototype.setOptions(options);
 		paint.shape.prototype.cleanEvents();
 		paint.shape.prototype.attachMouseDown();
 

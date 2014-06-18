@@ -87,9 +87,7 @@
     };
 
     me.clearPreDefinedOptions = function () {
-        paint.canvasElement.onmousedown = undefined;
-        paint.canvasElement.onmousemove = undefined;
-        paint.canvasElement.onmouseup = undefined;
+        $(paint.canvasElement).off();
 
         var clearColor = "white";
 
@@ -97,6 +95,8 @@
         paint.ctx.strokeStyle = clearColor;
         paint.ctx.shadowColor = clearColor;
         paint.ctx.shadowBlur = 0;
+
+        paint.shape.prototype.cleanEvents();
     }
 
     me.clearCanvas = function () {
@@ -117,6 +117,7 @@
     me.changeLineWidth = function (lineWidth) {
         lineWidth = lineWidth || 5;
         paint.ctx.lineWidth = lineWidth;
+        paint.ctxTemp.lineWidth = lineWidth;
 
         if (me.currentBrush) {
             var currentBrush = brushes[me.currentBrush];
@@ -127,6 +128,7 @@
     me.changeStrokeColor = function (color) {
         color = color || "black";
         paint.ctx.strokeStyle = color;
+        paint.ctxTemp.strokeStyle = color;
 
         if (me.currentBrush) {
             var currentBrush = brushes[me.currentBrush];
@@ -137,6 +139,7 @@
     me.changeFillColor = function (color) {
         color = color || "black";
         paint.ctx.fillStyle = color;
+        paint.ctxTemp.fillStyle = color;
 
         if (me.currentBrush) {
             var currentBrush = brushes[me.currentBrush];

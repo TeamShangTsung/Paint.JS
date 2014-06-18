@@ -12,11 +12,30 @@
             y: 0
         };
 
+        //Base methods
         paint.shape.prototype.attachMouseDown = function () {
             $(paint.canvasElement).on("mousedown", this.onMouseDown);
         }
 
-        //Base methods
+        paint.shape.prototype.setOptions = function (options) {
+            if (options) {
+                if (options.lineWidth) {
+                    paint.ctx.lineWidth = options.lineWidth;
+                    paint.ctxTemp.lineWidth = options.lineWidth;
+                }
+
+                if (options.strokeColor) {
+                    paint.ctx.strokeStyle = options.strokeColor;
+                    paint.ctxTemp.strokeStyle = options.strokeColor;
+                }
+
+                if (options.fillColor) {
+                    paint.ctx.fillStyle = options.fillColor;
+                    paint.ctxTemp.fillStyle = options.fillColor;
+                }
+            }
+        }
+
         paint.shape.prototype.onMouseDown = function (ev) {
             self.startPosition.x = ev.clientX;
             self.startPosition.y = ev.clientY;

@@ -1,8 +1,8 @@
 ﻿(function (paint, $, undefined) {
     //Constructor
-    paint.shape.chat = function () {
+    paint.shape.chat = function (options) {
         // Call the parent constructor
-        paint.shape.call(this)
+        paint.shape.call(this);
         $(paint.canvasElement).on("mousedown", this.onMouseDown);
 
         var self = this;
@@ -19,8 +19,10 @@
             target.lineTo(self.startPosition.x, self.finalPosition.y);
             target.closePath();
             target.stroke();
+            target.fill();
         }
 
+        paint.shape.prototype.setOptions(options);
         paint.shape.prototype.cleanEvents();
         paint.shape.prototype.attachMouseDown();
 

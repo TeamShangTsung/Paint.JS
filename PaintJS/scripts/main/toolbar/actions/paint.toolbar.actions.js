@@ -48,16 +48,16 @@
 
         switch (shapeType) {
             case 'line':
-                me.selectedShape = new paint.shape.line();
+                me.selectedShape = new paint.shape.line(options);
                 break;
             case 'rectangle':
-                me.selectedShape = new paint.shape.rectangle();
+                me.selectedShape = new paint.shape.rectangle(options);
                 break;
             case 'circle':
-                me.selectedShape = new paint.shape.circle();
+                me.selectedShape = new paint.shape.circle(options);
                 break;
             case 'chat':
-                me.selectedShape = new paint.shape.chat();
+                me.selectedShape = new paint.shape.chat(options);
                 break;
             default:
                 return;

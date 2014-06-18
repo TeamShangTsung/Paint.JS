@@ -1,8 +1,8 @@
 ﻿(function (paint, $, undefined) {
     //Constructor
-    paint.shape.rectangle = function () {
+    paint.shape.rectangle = function (options) {
         // Call the parent constructor
-        paint.shape.call(this)
+        paint.shape.call(this);
         $(paint.canvasElement).on("mousedown", this.onMouseDown);
 
         var self = this;
@@ -16,8 +16,13 @@
             target.lineTo(self.startPosition.x, self.finalPosition.y);
             target.closePath();
             target.stroke();
+
+            var width = self.finalPosition.x - self.startPosition.x;
+            var height = self.finalPosition.y - self.startPosition.y;
+            target.fillRect(self.startPosition.x, self.startPosition.y, width, height);
         }
 
+        paint.shape.prototype.setOptions(options);
         paint.shape.prototype.cleanEvents();
         paint.shape.prototype.attachMouseDown();
 
