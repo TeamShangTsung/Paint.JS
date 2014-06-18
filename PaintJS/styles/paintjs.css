@@ -533,6 +533,12 @@ body {
     margin: 0;
 }
 
+#animate {
+    background : url(images/animate.png) no-repeat;
+    width: 38px;
+    height: 24px;
+}
+
 #shapes-label {
     left: 97px;
 }
@@ -801,7 +807,7 @@ body {
 }
 
 #fill-button-label {
-    display: block;
+    display: inline-block;
     width: 28px;
     height: 28px;
     background: url(images/fill.png) no-repeat;
