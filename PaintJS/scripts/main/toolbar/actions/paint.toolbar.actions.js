@@ -56,6 +56,9 @@
             case 'circle':
                 me.selectedShape = new paint.shape.circle();
                 break;
+            case 'chat':
+                me.selectedShape = new paint.shape.chat();
+                break;
             default:
                 return;
         }

@@ -22,8 +22,8 @@
 		paint.shape.line.prototype.onMouseMove = function (ev) {
 			//call base method
 			paint.shape.prototype.onMouseMove(ev);
-
-			ctx.clearRect(0, 0, paint.canvasElement.clientWidth, paint.canvasElement.clientHeight);
+            
+			paint.canvas.clearCanvas();
 			drawLine(ctx);
 
 			$(paint.canvasElement).on("mouseup", self.onMouseUp);

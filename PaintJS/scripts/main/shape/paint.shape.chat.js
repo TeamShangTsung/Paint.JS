@@ -3,11 +3,26 @@
     paint.shape.chat = function () {
         // Call the parent constructor
         paint.shape.call(this)
-        paint.canvasElement.addEventListener("mousedown", this.onMouseDown);
+        $(paint.canvasElement).on("mousedown", this.onMouseDown);
 
         var self = this;
-        var ctx = paint.ctx;
-        var canvas = paint.canvasElement;
+
+        function drawChat(target) {
+            var chat = Math.abs(self.startPosition.x - self.finalPosition.x) / 5;
+            target.beginPath();
+            target.moveTo(self.startPosition.x, self.startPosition.y);
+            target.lineTo(self.finalPosition.x, self.startPosition.y);
+            target.lineTo(self.finalPosition.x, self.finalPosition.y);
+            target.lineTo(self.startPosition.x + (2 * chat), self.finalPosition.y);
+            target.lineTo(self.startPosition.x + (1.5 * chat), self.finalPosition.y + (chat / 2));
+            target.lineTo(self.startPosition.x + chat, self.finalPosition.y);
+            target.lineTo(self.startPosition.x, self.finalPosition.y);
+            target.closePath();
+            target.stroke();
+        }
+
+        paint.shape.prototype.cleanEvents();
+        paint.shape.prototype.attachMouseDown();
 
         //override base methods
         paint.shape.chat.prototype.onMouseMove = function (ev) {
@@ -15,20 +30,15 @@
             paint.shape.prototype.onMouseMove(ev);
 
             paint.canvas.clearCanvas();
-            //ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-            var chat = Math.abs(self.startPosition.x - self.finalPosition.x) / 5;
-            ctx.beginPath();
-            ctx.moveTo(self.startPosition.x, self.startPosition.y);
-            ctx.lineTo(self.finalPosition.x, self.startPosition.y);
-            ctx.lineTo(self.finalPosition.x, self.finalPosition.y);
-            ctx.lineTo(self.startPosition.x + (2 * chat), self.finalPosition.y);
-            ctx.lineTo(self.startPosition.x + (1.5 * chat), self.finalPosition.y + (chat / 2));
-            ctx.lineTo(self.startPosition.x + chat, self.finalPosition.y);
-            ctx.lineTo(self.startPosition.x, self.finalPosition.y);
-            ctx.closePath();
-            ctx.stroke();
+            drawChat(paint.ctx);
 
-            canvas.addEventListener("mouseup", self.onMouseUp);
+            $(paint.canvasElement).on("mouseup", self.onMouseUp);
+        }
+
+        paint.shape.chat.prototype.onMouseUp = function (ev) {
+            //call base method
+            paint.shape.prototype.onMouseUp(ev);
+            drawChat(paint.ctxTemp);
         }
     }
 

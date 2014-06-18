@@ -24,7 +24,6 @@
             paint.shape.prototype.onMouseMove(ev);
 
             paint.canvas.clearCanvas();
-            //ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
             drawCircle(ctx);
 
             $(paint.canvasElement).on("mouseup", self.onMouseUp);
