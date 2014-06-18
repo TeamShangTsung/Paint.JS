@@ -21,8 +21,12 @@
                 ctx.lineWidth = arguments.lineWidth;
             }
 
-            if (arguments.color) {
-                ctx.strokeStyle = arguments.color;
+            if (arguments.strokeColor) {
+                ctx.strokeStyle = arguments.strokeColor;
+            }
+
+            if (arguments.fillColor) {
+                ctx.fillColor = arguments.fillColor;
             }
 
             if (arguments.type) {
@@ -116,11 +120,32 @@
         }
     };
 
+    me.changeStrokeColor = function (color) {
+        color = color || "black";
+        paint.ctx.strokeStyle = color;
+
+        if (me.currentBrush) {
+            var currentBrush = brushes[me.currentBrush];
+            currentBrush.init();
+        }
+    }
+
+    me.changeFillColor = function (color) {
+        color = color || "black";
+        paint.ctx.fillStyle = color;
+
+        if (me.currentBrush) {
+            var currentBrush = brushes[me.currentBrush];
+            currentBrush.init();
+        }
+    }
+
     //Brush types
     var smoothingShadow = {
         init: function () {
             paint.ctx.shadowBlur = 10;
-            paint.ctx.shadowColor = 'rgb(0, 0, 0)';
+            paint.ctx.strokeStyle = paint.ctx.strokeStyle || 'rgb(0, 0, 0)';
+            paint.ctx.shadowColor = paint.ctx.strokeStyle;
         }
     };
 
@@ -316,8 +341,8 @@
 
     var trailPen = {
         init: function () {
-            paint.ctx.fillStyle = paint.ctx.strokeStyle;
-            paint.ctx.strokeStyle = "black";
+            paint.ctx.fillStyle = paint.ctx.fillStyle || "#000";
+            paint.ctx.strokeStyle = paint.ctx.strokeStyle || "#000";
         },
         onMouseDownSpecific: function (e) {
             this.lastPoint = {
@@ -357,7 +382,6 @@
 
     var randomRadius = {
         init: function () {
-            paint.ctx.fillStyle = paint.ctx.strokeStyle;
             paint.ctx.strokeStyle = "white";
             this.points = [];
             this.radius = paint.ctx.lineWidth;

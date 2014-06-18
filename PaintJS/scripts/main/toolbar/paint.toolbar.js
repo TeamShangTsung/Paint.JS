@@ -123,7 +123,13 @@
 
                 $(currentColorPicker).remove();
                 $('<input id="' + currentColorPicker.substring(1) + '" class="color-picker" type="color" value="' + newColor + '">').prependTo($(location.hash));
-            };
+
+                if (currentColorPicker === '#color-picker-1') {
+                    paint.canvas.changeStrokeColor(newColor);
+                } else {
+                    paint.canvas.changeFillColor(newColor);
+                }
+            }
         });
     });
 })(window.paint = window.paint || {}, jQuery);
