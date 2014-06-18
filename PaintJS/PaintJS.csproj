@@ -113,6 +113,7 @@
     <Content Include="styles\images\pencil.png" />
     <Content Include="styles\images\rectangle.png" />
     <Content Include="styles\images\text.png" />
+    <Content Include="styles\images\trash.png" />
     <Content Include="styles\mainPage.css" />
     <Content Include="styles\normalize.css" />
     <Content Include="styles\paintjs.css" />
@@ -135,7 +136,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1261</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

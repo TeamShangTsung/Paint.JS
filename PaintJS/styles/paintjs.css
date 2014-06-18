@@ -123,6 +123,25 @@ body {
     background-position: 3px 3px;
 }
 
+#trash {
+    background: url(images/trash.png) no-repeat;
+    background-position: 3px 3px;
+}
+
+#trash:hover {
+    background: #E8EFF7 url(images/trash.png) no-repeat;
+    border: 1px solid #B5D6F9;
+    margin: 0;
+    background-position: 3px 3px;
+}
+
+#trash:target {
+    background: #B5D6F9 url(images/trash.png) no-repeat;
+    border: 1px solid #73ADE9;
+    margin: 0;
+    background-position: 3px 3px;
+}
+
 #brush {
     display: block;
     margin: 0 auto;

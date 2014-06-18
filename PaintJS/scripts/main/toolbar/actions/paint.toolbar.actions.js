@@ -74,6 +74,17 @@
         link.click();
     };
 
+    me.eraseCanvasContent = function () {
+        paint.canvas.clearCanvas();
+
+        var canvasElement = paint.canvasTemp;
+        var ctx = paint.ctxTemp;
+        ctx.save();
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+        ctx.restore();
+    }
+
     function getOptions() {
         var lineWidth = parseInt($('#line-width').attr('data-line-width'));
         var strokeColor = $('#color-picker-1').val();
