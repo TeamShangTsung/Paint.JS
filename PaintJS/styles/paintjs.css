@@ -353,6 +353,7 @@ body {
     background-color: white;
     border: 1px solid #EAEBEC;
     padding-top: 5px;
+    margin-bottom: 5px;
 }
 
 #line {
@@ -752,4 +753,24 @@ body {
 
 .color:hover {
     border: 1px solid #B5D6F9;
+}
+
+#fill-button {
+    display: none;
+}
+
+#fill-button-label {
+    display: block;
+    width: 28px;
+    height: 28px;
+    background: url(images/fill.png) no-repeat;
+    background-position: 2px 2px;
+    margin: 0 auto;
+}
+
+#fill-button:checked + #fill-button-label {
+    background: #B5D6F9 url(images/fill.png) no-repeat;
+    background-position: 2px 2px;
+    border: 1px solid #73ADE9;
+    margin: 0 auto;
 }

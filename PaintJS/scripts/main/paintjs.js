@@ -11,7 +11,8 @@
         var header = $('#toolbar-container')[0];
         var mainContainer = $('#canvas')[0];
         paint.ctx.translate(-mainContainer.offsetLeft, -header.offsetHeight-header.offsetTop);
-        paint.ctxTemp.translate(0, -header.offsetHeight);
+        paint.ctxTemp.translate(-mainContainer.offsetLeft, -header.offsetHeight-header.offsetTop);
+        //paint.ctxTemp.translate(0, -header.offsetHeight);
 
         CanvasRenderingContext2D.prototype.canvasPosition = {
             x: 0,
