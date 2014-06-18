@@ -9,6 +9,7 @@
     me.drawing = function (arguments) {
         var isDrawing;
         var currentBrush = undefined;
+        var drawingPath = [];
 
         //default values
         paint.ctx.lineJoin = 'round';
@@ -32,49 +33,55 @@
                 currentBrush.init();
             }
         }
-
-        paint.canvasElement.onmousedown = function (e) {
+        
+        $(paint.canvasElement).on("mousedown", function (e) {
             isDrawing = true;
             paint.ctx.moveTo(e.clientX, e.clientY);
+
             animationPath.push({x: e.clientX, y: e.clientY});
+            drawingPath.push({x: e.clientX, y: e.clientY});
 
             if (currentBrush && currentBrush.onMouseDownSpecific) {
                 currentBrush.onMouseDownSpecific(e);
             }
-        };
+        });
 
-        paint.canvasElement.onmousemove = function (e) {
+        $(paint.canvasElement).on("mousemove", function (e) {
             if (isDrawing) {
+                animationPath.push({ x: e.clientX, y: e.clientY });
+                drawingPath.push({ x: e.clientX, y: e.clientY });
+
                 if (!currentBrush || !currentBrush.action) {
                     paint.ctx.lineTo(e.clientX, e.clientY);
                     paint.ctx.stroke();
-                    animationPath.push({x: e.clientX, y: e.clientY});
                 } else {
                     currentBrush.action(e);
                 }
             }
-        };
+        });
 
-        paint.canvasElement.onmouseup = function () {
+        $(paint.canvasElement).on("mouseup", function () {
             isDrawing = false;
             animationPath.push({ x: "skip", y: "skip" });
+            me.writeDrawingToMainCanvas(drawingPath);
+            drawingPath = [];
             if (currentBrush && currentBrush.onMouseUpSpecific) {
                 currentBrush.onMouseUpSpecific();
             }
-        };
+        });
     }
 
     me.animateDrawing = function(){
-        var ctx = paint.ctx,
-            canvasElement = paint.canvasElement,
+        var ctx = paint.ctxTemp,
             index = 0;
 
+        me.clearCanvasTemp();
         me.clearCanvas();
         ctx.beginPath();
         ctx.moveTo(animationPath[0]['x'], animationPath[0]['y']);
 
         function drawAnimation(){
-            if(index == animationPath.length - 1) {
+            if(index === animationPath.length - 1) {
                 return;
             }
             index += 1;
@@ -90,6 +97,16 @@
             window.requestAnimationFrame(drawAnimation);
         }
         drawAnimation();
+    };
+
+    me.writeDrawingToMainCanvas = function (points) {
+        paint.ctxTemp.beginPath();
+        paint.ctxTemp.moveTo(points[0]['x'], points[0]['y']);
+
+        for (var i = 0; i < points.length; i++) {
+            paint.ctxTemp.lineTo(points[i]['x'], points[i]['y']);
+            paint.ctxTemp.stroke();
+        }
     };
 
     me.clearPreDefinedOptions = function () {
@@ -108,6 +125,21 @@
     me.clearCanvas = function () {
         var canvasElement = paint.canvasElement;
         var ctx = paint.ctx;
+
+        // Store the current transformation matrix
+        ctx.save();
+
+        // Use the identity matrix while clearing the canvas
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+        // Restore the transform
+        ctx.restore();
+    }
+
+    me.clearCanvasTemp = function () {
+        var canvasElement = paint.canvasTemp;
+        var ctx = paint.ctxTemp;
 
         // Store the current transformation matrix
         ctx.save();

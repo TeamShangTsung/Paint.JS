@@ -165,16 +165,7 @@
 
     me.eraseCanvasContent = function () {
         paint.canvas.clearCanvas();
-
-        var canvasElement = paint.canvasTemp;
-        var ctx = paint.ctxTemp;
-
-        ctx.save();
-
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
-        ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-
-        ctx.restore();
+        paint.canvas.clearCanvasTemp();
     }
 
     me.getPixelColor = function () {
