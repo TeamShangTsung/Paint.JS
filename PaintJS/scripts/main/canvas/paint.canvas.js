@@ -32,12 +32,12 @@
                 currentBrush.init();
             }
         }
-        
+
         $(paint.canvasElement).on("mousedown", function (e) {
             isDrawing = true;
             paint.ctx.moveTo(e.clientX, e.clientY);
 
-            animationPath.push({x: e.clientX, y: e.clientY});
+            animationPath.push({ x: e.clientX, y: e.clientY });
 
             if (currentBrush && currentBrush.onMouseDownSpecific) {
                 currentBrush.onMouseDownSpecific(e);
@@ -67,17 +67,17 @@
         });
     }
 
-    me.animateDrawing = function(){
+    me.animateDrawing = function () {
         var ctx = paint.ctx,
             index = 0;
 
-        me.clearCanvasTemp();
-        me.clearCanvas();
+        me.clearCanvas("temp");
+        me.clearCanvas("main");
         ctx.beginPath();
         ctx.moveTo(animationPath[0]['x'], animationPath[0]['y']);
 
-        function drawAnimation(){
-            if(index === animationPath.length - 1) {
+        function drawAnimation() {
+            if (index === animationPath.length - 1) {
                 return;
             }
             index += 1;
@@ -85,8 +85,8 @@
                 ctx.lineTo(animationPath[index]['x'], animationPath[index]['y']);
                 ctx.stroke();
             } else {
-                if (index+1 < animationPath.length) {
-                    ctx.moveTo(animationPath[index+1]['x'], animationPath[index+1]['y']);
+                if (index + 1 < animationPath.length) {
+                    ctx.moveTo(animationPath[index + 1]['x'], animationPath[index + 1]['y']);
                 }
             }
 
@@ -108,24 +108,19 @@
         paint.shape.prototype.cleanEvents();
     }
 
-    me.clearCanvas = function () {
-        var canvasElement = paint.canvasElement;
-        var ctx = paint.ctx;
+    me.clearCanvas = function (target) {
+        target = target || "main";
 
-        // Store the current transformation matrix
-        ctx.save();
+        var canvasElement;
+        var ctx;
 
-        // Use the identity matrix while clearing the canvas
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
-        ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-
-        // Restore the transform
-        ctx.restore();
-    }
-
-    me.clearCanvasTemp = function () {
-        var canvasElement = paint.canvasTemp;
-        var ctx = paint.ctxTemp;
+        if (target === "main") {
+            canvasElement = paint.canvasElement;
+            ctx = paint.ctx;
+        } else {
+            canvasElement = paint.canvasTemp;
+            ctx = paint.ctxTemp;
+        }
 
         // Store the current transformation matrix
         ctx.save();
@@ -177,6 +172,10 @@
             paint.ctx.shadowBlur = 10;
             paint.ctx.strokeStyle = paint.ctx.strokeStyle || 'rgb(0, 0, 0)';
             paint.ctx.shadowColor = paint.ctx.strokeStyle;
+            
+        },
+        onMouseDownSpecific: function (e) {
+            paint.ctx.beginPath();
         }
     };
 
@@ -436,7 +435,6 @@
                 opacity: Math.random()
             });
 
-            paint.ctx.clearRect(0, 0, paint.ctx.canvas.width, paint.ctx.canvas.height);
             for (var i = 0; i < this.points.length; i++) {
                 paint.ctx.beginPath();
                 paint.ctx.globalAlpha = this.points[i].opacity;
@@ -514,10 +512,23 @@
     var eraserPen = {
         init: function () {
             paint.ctx.lineCap = 'square';
+        },
+        onMouseDownSpecific: function (e) {
+            paint.ctx.beginPath();
+        }
+    };
+
+    var pencil = {
+        init: function () {
+            return;
+        },
+        onMouseDownSpecific: function (e) {
+            paint.ctx.beginPath();
         }
     };
 
     var brushes = {
+        pencil: pencil,
         eraser: eraserPen,
         smoothingShadow: smoothingShadow,
         radialGradient: radialGradient,

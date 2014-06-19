@@ -24,7 +24,7 @@
 			//call base method
 			paint.shape.prototype.onMouseMove(ev);
             
-			paint.canvas.clearCanvasTemp();
+			paint.canvas.clearCanvas("temp");
 			drawLine(paint.ctxTemp);
 
 			$(paint.canvasElement).on("mouseup", self.onMouseUp);

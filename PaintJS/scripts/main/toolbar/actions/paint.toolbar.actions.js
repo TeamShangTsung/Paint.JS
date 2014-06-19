@@ -150,6 +150,9 @@
     me.selectedShape = undefined;
 
     me.drawShapes = function (target) {
+        //Clean predifined options for the canvas
+        paint.canvas.clearPreDefinedOptions();
+
         var options = getOptions();
         var shapeType = target.attr('id');
         if (me.selectedShape) {
@@ -185,14 +188,8 @@
     };
 
     me.eraseCanvasContent = function () {
+        paint.canvas.clearCanvas("temp");
         paint.canvas.clearCanvas();
-
-        var canvasElement = paint.canvasTemp;
-        var ctx = paint.ctxTemp;
-        ctx.save();
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
-        ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-        ctx.restore();
     }
 
     me.getPixelColor = function () {
